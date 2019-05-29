@@ -6,6 +6,11 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{tikz,fullpage}
+\usepackage{tkz-graph}
+\usepackage[position=top]{subfig}
 
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
@@ -92,11 +97,59 @@ Claim: a super-optimized channel network will be less useful than a very subopti
 
 \subsection*{Asymetric}
 
-This is a plausible test case because it minimal in the number of transactions. Even after account abstraction, it is minimal in the number of ERCECOVERS.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$1/1$](A)(B)
+        \Edge[label=$1/1$](B)(C)
+        \Edge[style={bend left}](A)(C)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$0/2$](A)(B)
+        \Edge(B)(C)
+        \Edge[style={bend left},label=$1/1$](A)(C)
+    \end{tikzpicture}
+\end{figure}
+
+This manner of ejectning might be preferred because it minimal in the number of transactions. Even after account abstraction, it is minimal in the number of ERCECOVERS.
 
 \subsection*{Symmetric}
 
-Plausible because of capacity
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$1/1$](A)(B)
+        \Edge[label=$1/1$](B)(C)
+        \Edge[style={bend left}](A)(C)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$0/1$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[style={bend left},label=$1/1$](A)(C)
+    \end{tikzpicture}
+\end{figure}
+
+Might be preferred because of capacity
 
 \subsection*{Symmetric Unidirectional}
 \subsection*{Asymmetric Unidirectional}
