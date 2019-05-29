@@ -49,7 +49,7 @@
 
 \section*{Introduction}
 
-This research note was written because there are some unsolved problems in designing state channel networks that are not well-known or being worked on. Precisely defining these problems requires formally modelling of state channel networks, and the problems presented are only present if the formal models include agents' preferences over network topology (payment capacity), blockchain fees, and capital costs.
+This research note was written because there are some unsolved problems in designing state channel networks that are not well-known or being worked on. These problems are only present if we consider agents' preferences over network topology (payment capacity), blockchain fees, and capital costs.
 
 \section*{Relevant Prerequisite Literature}
 
@@ -152,19 +152,248 @@ This manner of ejectning might be preferred because it minimal in the number of 
 Might be preferred because of capacity
 
 \subsection*{Symmetric Unidirectional}
-\subsection*{Asymmetric Unidirectional}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$2/0$](A)(B)
+        \Edge[label=$2/0$](B)(C)
+        \Edge[style={bend left}](A)(C)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$0/1$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[style={bend left},label=$2/0$](A)(C)
+    \end{tikzpicture}
+\end{figure}
+
+\subsection*{Asymmetric Unidirectional 1}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$1/0$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[style={bend left}](A)(C)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$0/1$](A)(B)
+        \Edge(B)(C)
+        \Edge[style={bend left},label=$1/0$](A)(C)
+    \end{tikzpicture}
+\end{figure}
+
+\subsection*{Asymmetric Unidirectional 2}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge[label=$1/0$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[style={bend left}](A)(C)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=2.75]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Edge(A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[style={bend left},label=$1/0$](A)(C)
+    \end{tikzpicture}
+\end{figure}
 
 \subsection*{Long-Chain Large-Radius}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Vertex[x=6,y=0]{D}
+        \Vertex[x=8,y=0]{E}
+        \Vertex[x=10,y=0]{F}
+        \Edge[label=$1/0$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[label=$1/0$](C)(D)
+        \Edge[label=$1/0$](D)(E)
+        \Edge[label=$1/0$](E)(F)
+        \Edge[style={bend left}](A)(F)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Vertex[x=6,y=0]{D}
+        \Vertex[x=8,y=0]{E}
+        \Vertex[x=10,y=0]{F}
+        \Edge[label=$0/1$](A)(B)
+        \Edge[label=$0/1$](B)(C)
+        \Edge[label=$0/1$](C)(D)
+        \Edge(D)(E)
+        \Edge[label=$1/0$](E)(F)
+        \Edge[style={bend left},label=$1/0$](A)(F)
+    \end{tikzpicture}
+\end{figure}
+
 \subsection*{Long-Chain Short-Radius}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Vertex[x=6,y=0]{D}
+        \Vertex[x=8,y=0]{E}
+        \Vertex[x=10,y=0]{F}
+        \Edge[label=$1/0$](A)(B)
+        \Edge[label=$1/0$](B)(C)
+        \Edge[label=$1/0$](C)(D)
+        \Edge[label=$1/0$](D)(E)
+        \Edge[label=$1/0$](E)(F)
+        \Edge[style={bend left}](C)(E)
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=0]{A}
+        \Vertex[x=2,y=0]{B}
+        \Vertex[x=4,y=0]{C}
+        \Vertex[x=6,y=0]{D}
+        \Vertex[x=8,y=0]{E}
+        \Vertex[x=10,y=0]{F}
+        \Edge[label=$0/1$](A)(B)
+        \Edge[label=$0/1$](B)(C)
+        \Edge[label=$0/1$](C)(D)
+        \Edge(D)(E)
+        \Edge[label=$1/0$](E)(F)
+        \Edge[style={bend left},label=$1/0$](C)(E)
+    \end{tikzpicture}
+\end{figure}
+
 \subsection*{Multipath}
-\subsection*{Long-Chain Multipath}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=2,y=0]{D}
+        \Vertex[x=0,y=1]{A}
+        \Vertex[x=4,y=1]{E}
+        \Vertex[x=1,y=2]{B}
+        \Vertex[x=3,y=2]{C}
+        \Edge(A)(E)
+        \Edge(A)(B)
+        \Edge(B)(C)
+        \Edge(C)(E)
+        \Edge(A)(D)
+        \Edge(D)(E)
+    \end{tikzpicture}
+\end{figure}
+
 \subsection*{Thanos Star}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=2.5]{A}
+        \Vertex[x=3,y=0]{B}
+        \Vertex[x=3,y=1]{C}
+        \Vertex[x=3,y=2]{D}
+        \Vertex[x=3,y=3]{E}
+        \Vertex[x=3,y=4]{F}
+        \Vertex[x=3,y=5]{G}
+        \begin{scope}[VertexStyle/.append style = {rectangle}]
+        \Vertex[x=6,y=2.5,style={color=red}]{H}
+        \end{scope}
+        \Edge[label=$1/1$](A)(B)
+        \Edge[label=$1/1$](A)(C)
+        \Edge[label=$1/1$](A)(D)
+        \Edge[label=$1/1$](A)(E)
+        \Edge[label=$1/1$](A)(F)
+        \Edge[label=$1/1$](A)(G)
+        \Edge(H)(B)
+        \Edge(H)(C)
+        \Edge(H)(D)
+        \Edge(H)(E)
+        \Edge(H)(F)
+        \Edge(H)(G)
+    \end{tikzpicture}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \GraphInit[vstyle=Normal]
+        \SetVertexSimple
+        \Vertex[x=0,y=2.5]{A}
+        \Vertex[x=3,y=0]{B}
+        \Vertex[x=3,y=1]{C}
+        \Vertex[x=3,y=2]{D}
+        \Vertex[x=3,y=3]{E}
+        \Vertex[x=3,y=4]{F}
+        \Vertex[x=3,y=5]{G}
+        \begin{scope}[VertexStyle/.append style = {rectangle}]
+        \Vertex[x=6,y=2.5,style={color=red}]{H}
+        \end{scope}
+        \Edge(A)(B)
+        \Edge(A)(C)
+        \Edge(A)(D)
+        \Edge[label=$2/0$](A)(E)
+        \Edge[label=$2/0$](A)(F)
+        \Edge[label=$2/0$](A)(G)
+        \Edge[label=$1$](H)(B)
+        \Edge[label=$1$](H)(C)
+        \Edge[label=$1$](H)(D)
+        \Edge[label=$1$](H)(E)
+        \Edge[label=$1$](H)(F)
+        \Edge[label=$1$](H)(G)
+    \end{tikzpicture}
+\end{figure}
 
 Minimal in number of transactions
 
-\subsection*{Self-Lock-In}
+\subsection*{Further test cases}
 
-
+Self-Lock-In
 
 
 
