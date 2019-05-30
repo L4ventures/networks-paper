@@ -69,7 +69,7 @@ This shows Alice sending Bob 2 beads via Hub. The remaining capacity along this 
 
 \subsection*{Rebalancing}
 
-We say that two channel networks are value-equivalent if the set of agents is the same and each agent owns the same. A channel network is rebalanced when it transitions into a value-equivalent state. This transition can include on-chain transactions or not. In the following on-chain rebalance, Bob increases the capacity of the Bob $\to$ Alice link.
+We say that two payment channel networks are value-equivalent if the set of agents is the same and each agent owns the amount of beads summed over all their channels. A channel network is rebalanced when it transitions into a value-equivalent state. This transition can include on-chain transactions or not. In the following on-chain rebalance, Bob increases the capacity of the Bob $\to$ Alice link.
 
 \begin{center}
 \includegraphics[scale=0.4]{on-chain-rebalancing-1.png}
@@ -93,7 +93,7 @@ Are off-chain rebalances sufficient? In general, no.
 
 \subsection*{Time-based lockup}
 
-There are two ways that intermediaries can structure agreements-to-route. They can agree to route a single payment. When that payment completes successfully, the balances change and they are free of any further commitments. The second way is to agree to lock up funds for a certain period of time, creating a ``virtual channel". The balances in the virtual channel can be updated instantly and many times without the intermediary's participation or knowledge. At the end of the lockup time, the final balances in the virtual channel are agreed to and we update the direct channel balances as though a single set of routed balance updates (routed payments) was made.
+There are multiple ways that intermediaries can structure agreements-to-route; we go through two extremal points here. They can agree to route a single payment. When that payment completes successfully, the balances change and they are free of any further commitments. The second way is to agree to lock up funds for a certain period of time, creating a ``virtual channel". The balances in the virtual channel can be updated instantly and many times without the intermediary's participation or knowledge. At the end of the lockup time, the final balances in the virtual channel are agreed to and we update the direct channel balances as though a single set of routed balance updates (routed payments) was made.
 
 \subsection*{Ejection}
 
@@ -126,7 +126,9 @@ Here, a virtual channel between A and B can be formed, with balance one bead for
     \end{tikzpicture}
 \end{figure}
 
-For this reason, thinking of lockups as ``time-based" is not strictly accurate; the costs an intermediary would incur in a channel network is both the cost of re-configuring the capacity graph as well as time-based opportunity cost of having their capital in excess of payments they would want to make anyway in the network (e.g. instead of staking), however both can be avoided by on-chain transactions; the instances where on-chain transactions are avoided and off-chain fees paid instead are therefore some complex subset of transactions in general.
+\subsection*{Intermediation Fees}
+
+For this reason, thinking of lockups as either completely ``per-payment" or ``time-based" is not strictly accurate; the costs an intermediary would incur in a channel network is both the cost of re-configuring the capacity graph as well as time-based opportunity cost of having their capital in excess of payments they would want to make anyway in the network (e.g. instead of staking), however both can be avoided by on-chain transactions; the instances where on-chain transactions are avoided and off-chain fees paid instead are therefore some complex subset of transactions in general.
 
 Here is a crude fee scheme that captures some of it this: an intermediary charges some large fee $F_1$ to intermediate a virtual channel, and assumes the responsibility of ejecting the channel; if the virtual channel participants have no further use for it, they negotiate a payment of $F_2$ from the intermediary to close the virtual channel offline. If the on-chain fee is $T$, we should have $0 < F_1 - F_2 < T < F_1$. On/off-chain rebalancing is handeled by an independent protocol.
 
@@ -150,11 +152,9 @@ TBW
 
 Plasma can be used to fund channels. If all channels are funded by plasma, then rebalancing is a plasma transaction in the normal case, i.e., the entire network can be rebalanced arbitrarily in a single ethereum transaction. I claim that a super-optimized channel network that does not support funding via plasma will be much more expensive than a very suboptimal one that supports funding via plasma.
 
-\section*{Model}
-
-TBW
-
 \section*{Ejection Test Cases}
+
+We present some ejection test cases and for each one, we show that it could be the optimal way of ejecting the channel given certain assumptions about the participants' preferences over the capacity graph and on-chain fees.
 
 \subsection*{Symmetric}
 
@@ -182,7 +182,7 @@ TBW
     \end{tikzpicture}
 \end{figure}
 
-Reviewed previously
+Reviewed previously.
 
 \subsection*{Asymetric}
 
