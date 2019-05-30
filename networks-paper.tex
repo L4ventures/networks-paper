@@ -132,6 +132,8 @@ For this reason, thinking of lockups as either completely ``per-payment" or ``ti
 
 Here is a crude fee scheme that captures some of it this: an intermediary charges some large fee $F_1$ to intermediate a virtual channel, and assumes the responsibility of ejecting the channel; if the virtual channel participants have no further use for it, they negotiate a payment of $F_2$ from the intermediary to close the virtual channel offline. If the on-chain fee is $T$, we should have $0 < F_1 - F_2 < T < F_1$. On/off-chain rebalancing is handeled by an independent protocol.
 
+Another design: timeout by default, but eject if agreed to.
+
 \subsection*{State Channels}
 
 By allowing beads to be locked into complex applications (e.g. chess, prediction markets) instead of just payments, the need for virtual channels as well as for ejection is even more apparent. Beads can be freed up and re-used within a virtual channel. The time bound for an application might be long or unknown (e.g., we lock beads up in a bet of whether any US Libertarian Party ever wins a House seat in the next 10 years),
